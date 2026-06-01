@@ -1,0 +1,1747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delhi Convent School - Result Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0a1628;
+  --gold: #c9972b;
+  --gold-light: #e8b84b;
+  --cream: #fdf6e3;
+  --white: #ffffff;
+  --red: #c0392b;
+  --green: #27ae60;
+  --blue: #2980b9;
+  --gray: #6b7280;
+  --light: #f3f4f6;
+  --border: #e5e7eb;
+  --shadow: 0 4px 24px rgba(10,22,40,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'DM Sans',sans-serif; background:var(--cream); color:var(--navy); min-height:100vh; }
+
+/* ===== HEADER ===== */
+header {
+  background: linear-gradient(135deg, var(--navy) 0%, #1a2e50 100%);
+  color: var(--white);
+  padding: 0;
+  position: sticky; top:0; z-index: 100;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+.header-top {
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 16px 40px;
+  border-bottom: 1px solid rgba(201,151,43,0.3);
+}
+.school-brand { display:flex; align-items:center; gap:16px; }
+.school-logo {
+  width:60px; height:60px; background: var(--gold);
+  border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family:'Playfair Display',serif; font-size:22px; font-weight:900; color:var(--navy);
+  box-shadow: 0 0 0 3px rgba(201,151,43,0.3);
+}
+.school-name h1 { font-family:'Playfair Display',serif; font-size:22px; font-weight:700; color:var(--gold-light); }
+.school-name p { font-size:12px; color:rgba(255,255,255,0.7); letter-spacing:1.5px; text-transform:uppercase; }
+.header-nav { display:flex; gap:8px; align-items:center; }
+.nav-btn {
+  padding:8px 20px; border-radius:6px; border:none; cursor:pointer;
+  font-family:'DM Sans',sans-serif; font-size:14px; font-weight:500; transition:all 0.2s;
+}
+.nav-btn.primary { background:var(--gold); color:var(--navy); }
+.nav-btn.primary:hover { background:var(--gold-light); }
+.nav-btn.outline { background:transparent; color:var(--white); border:1px solid rgba(255,255,255,0.3); }
+.nav-btn.outline:hover { background:rgba(255,255,255,0.1); }
+.header-sub {
+  display:flex; gap:24px; padding:10px 40px;
+  background: rgba(0,0,0,0.2);
+}
+.sub-tab {
+  padding:6px 16px; border-radius:4px; cursor:pointer; font-size:13px;
+  color:rgba(255,255,255,0.7); transition:all 0.2s; border:none; background:transparent;
+}
+.sub-tab.active, .sub-tab:hover { color:var(--gold-light); background:rgba(201,151,43,0.15); }
+
+/* ===== PAGES ===== */
+.page { display:none; }
+.page.active { display:block; }
+
+/* ===== HOME PAGE ===== */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, #162040 60%, #1a2e50 100%);
+  color:var(--white); padding:60px 40px; text-align:center;
+  position:relative; overflow:hidden;
+}
+.hero::before {
+  content:''; position:absolute; top:0; left:0; right:0; bottom:0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9972b' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero h2 { font-family:'Playfair Display',serif; font-size:42px; font-weight:900; margin-bottom:12px; position:relative; }
+.hero h2 span { color:var(--gold-light); }
+.hero p { font-size:16px; color:rgba(255,255,255,0.75); position:relative; }
+
+/* TOP TOPPERS */
+.section { padding:40px; }
+.section-title {
+  display:flex; align-items:center; gap:12px; margin-bottom:28px;
+}
+.section-title h3 { font-family:'Playfair Display',serif; font-size:26px; font-weight:700; }
+.section-title .line { flex:1; height:2px; background: linear-gradient(90deg, var(--gold), transparent); }
+
+.class-filter {
+  display:flex; gap:8px; flex-wrap:wrap; margin-bottom:24px;
+}
+.filter-btn {
+  padding:6px 16px; border-radius:20px; border:2px solid var(--border);
+  background:var(--white); cursor:pointer; font-size:13px; font-weight:500;
+  transition:all 0.2s; color:var(--gray);
+}
+.filter-btn.active, .filter-btn:hover {
+  border-color:var(--gold); background:var(--gold); color:var(--navy); font-weight:600;
+}
+
+.toppers-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:24px; }
+
+.topper-card {
+  background:var(--white); border-radius:16px; overflow:hidden;
+  box-shadow:var(--shadow); transition:transform 0.3s, box-shadow 0.3s;
+  border: 1px solid var(--border);
+  position:relative;
+}
+.topper-card:hover { transform:translateY(-4px); box-shadow:0 8px 40px rgba(10,22,40,0.18); }
+
+.topper-rank {
+  position:absolute; top:12px; left:12px; z-index:2;
+  width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-size:16px; font-weight:700; font-family:'Playfair Display',serif;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.rank-1 { background: linear-gradient(135deg, #ffd700, #ffb300); color:#7a5200; }
+.rank-2 { background: linear-gradient(135deg, #c0c0c0, #a0a0a0); color:#404040; }
+.rank-3 { background: linear-gradient(135deg, #cd7f32, #a0522d); color:#fff; }
+
+.topper-photo-wrap {
+  height:160px; background: linear-gradient(135deg, #e8f0fe, #dbeafe);
+  display:flex; align-items:center; justify-content:center; overflow:hidden;
+}
+.topper-photo-wrap img { width:100%; height:100%; object-fit:cover; }
+.topper-photo-placeholder {
+  width:80px; height:80px; border-radius:50%;
+  background: linear-gradient(135deg, var(--navy), #2a4080);
+  display:flex; align-items:center; justify-content:center;
+  font-size:30px; color:var(--gold);
+}
+.topper-info { padding:16px; }
+.topper-name { font-family:'Playfair Display',serif; font-size:18px; font-weight:700; margin-bottom:4px; }
+.topper-meta { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; }
+.meta-badge {
+  padding:2px 10px; border-radius:12px; font-size:11px; font-weight:600;
+  background:var(--light); color:var(--gray);
+}
+.meta-badge.class { background:#dbeafe; color:#1e40af; }
+.topper-marks {
+  display:flex; align-items:center; justify-content:space-between;
+  background:var(--light); border-radius:10px; padding:10px 14px;
+}
+.marks-pct { font-size:24px; font-weight:700; color:var(--green); font-family:'Playfair Display',serif; }
+.marks-detail { font-size:12px; color:var(--gray); text-align:right; }
+
+/* ALL RESULTS TABLE */
+.search-bar {
+  display:flex; gap:12px; margin-bottom:20px; flex-wrap:wrap;
+}
+.search-input {
+  flex:1; min-width:200px; padding:10px 16px; border-radius:8px;
+  border:2px solid var(--border); font-family:'DM Sans',sans-serif; font-size:14px;
+  background:var(--white); outline:none; transition:border-color 0.2s;
+}
+.search-input:focus { border-color:var(--gold); }
+select.search-input { cursor:pointer; }
+
+.results-table-wrap { overflow-x:auto; border-radius:12px; box-shadow:var(--shadow); }
+.results-table {
+  width:100%; border-collapse:collapse; background:var(--white);
+}
+.results-table th {
+  background: var(--navy); color:var(--gold-light);
+  padding:12px 16px; text-align:left; font-size:13px; font-weight:600;
+  letter-spacing:0.5px;
+}
+.results-table td { padding:12px 16px; border-bottom:1px solid var(--border); font-size:14px; }
+.results-table tr:hover td { background:var(--light); }
+.results-table tr:last-child td { border-bottom:none; }
+.rank-badge {
+  width:28px; height:28px; border-radius:50%; display:inline-flex;
+  align-items:center; justify-content:center; font-size:13px; font-weight:700;
+}
+.pct-bar-wrap { display:flex; align-items:center; gap:8px; }
+.pct-bar { height:6px; border-radius:3px; background:var(--border); flex:1; min-width:80px; }
+.pct-bar-fill { height:100%; border-radius:3px; background: linear-gradient(90deg, var(--green), #2ecc71); }
+.student-thumb {
+  width:32px; height:32px; border-radius:50%; object-fit:cover;
+  background:var(--light); display:inline-block;
+}
+
+/* ===== LOGIN PAGE ===== */
+.login-page {
+  min-height:calc(100vh - 100px);
+  display:flex; align-items:center; justify-content:center;
+  background: linear-gradient(135deg, #0a1628 0%, #1a2e50 100%);
+  padding:40px;
+}
+.login-card {
+  background:var(--white); border-radius:20px; padding:40px;
+  width:100%; max-width:400px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.login-logo {
+  text-align:center; margin-bottom:28px;
+}
+.login-logo .logo-circle {
+  width:70px; height:70px; border-radius:50%; background:var(--gold);
+  display:flex; align-items:center; justify-content:center; margin:0 auto 12px;
+  font-family:'Playfair Display',serif; font-size:26px; font-weight:900; color:var(--navy);
+}
+.login-logo h3 { font-family:'Playfair Display',serif; font-size:20px; color:var(--navy); }
+.login-logo p { font-size:13px; color:var(--gray); }
+.form-group { margin-bottom:20px; }
+.form-group label { display:block; font-size:13px; font-weight:600; color:var(--navy); margin-bottom:6px; }
+.form-input {
+  width:100%; padding:12px 16px; border-radius:8px;
+  border:2px solid var(--border); font-family:'DM Sans',sans-serif; font-size:14px;
+  outline:none; transition:border-color 0.2s;
+}
+.form-input:focus { border-color:var(--gold); }
+.btn-login {
+  width:100%; padding:14px; background: linear-gradient(135deg, var(--navy), #1a2e50);
+  color:var(--white); border:none; border-radius:8px; font-size:16px; font-weight:600;
+  cursor:pointer; font-family:'DM Sans',sans-serif; transition:all 0.2s;
+}
+.btn-login:hover { opacity:0.9; transform:translateY(-1px); }
+.login-error {
+  background:#fee2e2; color:#dc2626; padding:10px 14px; border-radius:8px;
+  font-size:13px; margin-bottom:16px; display:none;
+}
+
+/* ===== ADMIN PANEL ===== */
+.admin-layout { display:flex; min-height:calc(100vh - 100px); }
+.admin-sidebar {
+  width:240px; background:var(--navy); color:var(--white); flex-shrink:0;
+  padding:24px 0;
+}
+.admin-sidebar-title {
+  padding:0 24px 20px; font-family:'Playfair Display',serif; font-size:16px;
+  color:var(--gold-light); border-bottom:1px solid rgba(255,255,255,0.1); margin-bottom:16px;
+}
+.sidebar-menu { list-style:none; }
+.sidebar-menu li a, .sidebar-menu li button {
+  display:flex; align-items:center; gap:10px; padding:12px 24px;
+  color:rgba(255,255,255,0.7); text-decoration:none; font-size:14px;
+  cursor:pointer; background:none; border:none; width:100%; text-align:left;
+  transition:all 0.2s; font-family:'DM Sans',sans-serif;
+}
+.sidebar-menu li a:hover, .sidebar-menu li button:hover,
+.sidebar-menu li a.active, .sidebar-menu li button.active {
+  color:var(--gold-light); background:rgba(201,151,43,0.15);
+  border-left:3px solid var(--gold);
+}
+.admin-main { flex:1; padding:32px; background:var(--cream); overflow:auto; }
+.admin-section { display:none; }
+.admin-section.active { display:block; }
+.admin-title {
+  font-family:'Playfair Display',serif; font-size:26px; font-weight:700;
+  margin-bottom:24px; color:var(--navy);
+  display:flex; align-items:center; justify-content:space-between;
+}
+
+/* Cards */
+.stats-row { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:16px; margin-bottom:28px; }
+.stat-card {
+  background:var(--white); border-radius:12px; padding:20px;
+  box-shadow:var(--shadow); border-left:4px solid var(--gold);
+}
+.stat-card .val { font-size:32px; font-weight:700; font-family:'Playfair Display',serif; color:var(--navy); }
+.stat-card .lbl { font-size:13px; color:var(--gray); margin-top:4px; }
+
+/* Forms */
+.admin-form {
+  background:var(--white); border-radius:16px; padding:28px;
+  box-shadow:var(--shadow); max-width:700px;
+}
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.form-row.single { grid-template-columns:1fr; }
+.admin-form .form-group label { font-size:13px; font-weight:600; color:var(--navy); margin-bottom:6px; display:block; }
+.admin-form .form-input { width:100%; }
+.btn-primary {
+  padding:11px 24px; background:var(--gold); color:var(--navy);
+  border:none; border-radius:8px; font-size:14px; font-weight:600;
+  cursor:pointer; font-family:'DM Sans',sans-serif; transition:all 0.2s;
+}
+.btn-primary:hover { background:var(--gold-light); }
+.btn-danger {
+  padding:8px 16px; background:#fee2e2; color:#dc2626;
+  border:none; border-radius:6px; font-size:13px; font-weight:600;
+  cursor:pointer; font-family:'DM Sans',sans-serif; transition:all 0.2s;
+}
+.btn-danger:hover { background:#fecaca; }
+.btn-secondary {
+  padding:8px 16px; background:var(--light); color:var(--navy);
+  border:none; border-radius:6px; font-size:13px; font-weight:500;
+  cursor:pointer; font-family:'DM Sans',sans-serif;
+}
+.btn-edit {
+  padding:6px 14px; background:#dbeafe; color:#1d4ed8;
+  border:none; border-radius:6px; font-size:12px; font-weight:600;
+  cursor:pointer; font-family:'DM Sans',sans-serif;
+}
+.btn-edit:hover { background:#bfdbfe; }
+.success-msg {
+  background:#d1fae5; color:#065f46; padding:10px 16px; border-radius:8px;
+  font-size:13px; margin-bottom:16px; display:none;
+}
+
+/* Student management table */
+.mgmt-table { width:100%; border-collapse:collapse; background:var(--white); border-radius:12px; overflow:hidden; box-shadow:var(--shadow); }
+.mgmt-table th { background:var(--navy); color:var(--gold-light); padding:12px 14px; text-align:left; font-size:13px; }
+.mgmt-table td { padding:10px 14px; border-bottom:1px solid var(--border); font-size:13px; }
+.mgmt-table tr:hover td { background:var(--light); }
+
+/* Subjects table */
+.subjects-table { width:100%; border-collapse:collapse; }
+.subjects-table th, .subjects-table td { padding:10px 14px; border-bottom:1px solid var(--border); font-size:14px; }
+.subjects-table th { background:var(--navy); color:var(--gold-light); font-size:13px; }
+
+/* Photo upload */
+.photo-upload-box {
+  border:2px dashed var(--border); border-radius:10px; padding:20px;
+  text-align:center; cursor:pointer; transition:border-color 0.2s;
+  background:var(--light);
+}
+.photo-upload-box:hover { border-color:var(--gold); }
+.photo-preview {
+  width:80px; height:80px; border-radius:50%; object-fit:cover;
+  border:3px solid var(--gold); margin:8px auto; display:block;
+}
+
+/* Modal */
+.modal-overlay {
+  position:fixed; top:0; left:0; right:0; bottom:0;
+  background:rgba(0,0,0,0.5); z-index:1000; display:none;
+  align-items:center; justify-content:center; padding:20px;
+}
+.modal-overlay.open { display:flex; }
+.modal {
+  background:var(--white); border-radius:20px; padding:32px;
+  max-width:650px; width:100%; max-height:90vh; overflow-y:auto;
+  box-shadow:0 20px 60px rgba(0,0,0,0.3);
+}
+.modal-header {
+  display:flex; align-items:center; justify-content:space-between; margin-bottom:24px;
+}
+.modal-title { font-family:'Playfair Display',serif; font-size:20px; font-weight:700; }
+.modal-close {
+  width:32px; height:32px; border-radius:50%; border:none;
+  background:var(--light); cursor:pointer; font-size:18px; color:var(--gray);
+  display:flex; align-items:center; justify-content:center;
+}
+.marks-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; align-items:end; }
+.marks-grid .form-group { margin-bottom:0; }
+
+/* Notifications */
+.toast {
+  position:fixed; bottom:24px; right:24px; z-index:9999;
+  background:var(--navy); color:var(--white); padding:14px 20px;
+  border-radius:10px; font-size:14px; box-shadow:var(--shadow);
+  transform:translateY(80px); opacity:0; transition:all 0.3s;
+  border-left:4px solid var(--gold);
+}
+.toast.show { transform:translateY(0); opacity:1; }
+
+/* Tabs */
+.tab-group { display:flex; gap:4px; margin-bottom:20px; border-bottom:2px solid var(--border); }
+.tab-item {
+  padding:10px 20px; border:none; background:none; cursor:pointer;
+  font-family:'DM Sans',sans-serif; font-size:14px; color:var(--gray);
+  border-bottom:2px solid transparent; margin-bottom:-2px; transition:all 0.2s;
+}
+.tab-item.active { color:var(--gold); border-bottom-color:var(--gold); font-weight:600; }
+.tab-content { display:none; }
+.tab-content.active { display:block; }
+
+/* ===== ROLL LOOKUP ===== */
+.roll-lookup-wrap {
+  background: linear-gradient(135deg, #0d1f3c 0%, #1a3060 100%);
+  padding: 36px 40px;
+  border-bottom: 3px solid var(--gold);
+}
+.roll-lookup-inner {
+  max-width: 560px; margin: 0 auto; text-align:center;
+}
+.roll-lookup-inner h3 {
+  font-family:'Playfair Display',serif; font-size:22px; color:var(--gold-light);
+  margin-bottom:6px;
+}
+.roll-lookup-inner p { font-size:13px; color:rgba(255,255,255,0.6); margin-bottom:20px; }
+.roll-input-row {
+  display:flex; gap:10px;
+}
+.roll-input {
+  flex:1; padding:13px 18px; border-radius:10px; border:2px solid rgba(201,151,43,0.4);
+  background:rgba(255,255,255,0.08); color:var(--white);
+  font-family:'DM Sans',sans-serif; font-size:15px; outline:none;
+  transition:border-color 0.2s;
+}
+.roll-input::placeholder { color:rgba(255,255,255,0.4); }
+.roll-input:focus { border-color:var(--gold); background:rgba(255,255,255,0.12); }
+.roll-search-btn {
+  padding:13px 26px; background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color:var(--navy); border:none; border-radius:10px; font-size:15px; font-weight:700;
+  cursor:pointer; font-family:'DM Sans',sans-serif; transition:all 0.2s; white-space:nowrap;
+}
+.roll-search-btn:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(201,151,43,0.4); }
+.roll-error {
+  margin-top:14px; background:rgba(192,57,43,0.2); border:1px solid rgba(192,57,43,0.4);
+  color:#ff8a80; padding:10px 16px; border-radius:8px; font-size:13px; display:none;
+}
+
+/* Student Result Card */
+.result-card-overlay {
+  position:fixed; top:0; left:0; right:0; bottom:0;
+  background:rgba(5,12,28,0.75); z-index:2000; display:none;
+  align-items:center; justify-content:center; padding:16px;
+  backdrop-filter:blur(4px);
+}
+.result-card-overlay.open { display:flex; }
+.result-card {
+  background:var(--white); border-radius:24px; width:100%; max-width:600px;
+  max-height:92vh; overflow-y:auto;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+  animation: slideUp 0.35s cubic-bezier(.16,1,.3,1);
+}
+@keyframes slideUp { from{transform:translateY(40px);opacity:0} to{transform:translateY(0);opacity:1} }
+.rc-header {
+  background: linear-gradient(135deg, var(--navy) 0%, #1a3060 100%);
+  padding: 28px 28px 20px; border-radius:24px 24px 0 0; position:relative;
+  display:flex; align-items:center; gap:20px;
+}
+.rc-close {
+  position:absolute; top:16px; right:16px; width:34px; height:34px;
+  background:rgba(255,255,255,0.15); border:none; border-radius:50%; color:var(--white);
+  font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center;
+  transition:background 0.2s;
+}
+.rc-close:hover { background:rgba(255,255,255,0.25); }
+.rc-photo {
+  width:90px; height:90px; border-radius:50%; object-fit:cover; flex-shrink:0;
+  border:3px solid var(--gold); box-shadow:0 0 0 4px rgba(201,151,43,0.25);
+  background: linear-gradient(135deg,#1a2e50,#2a4080);
+  display:flex; align-items:center; justify-content:center; font-size:36px; color:var(--gold);
+  overflow:hidden;
+}
+.rc-photo img { width:100%; height:100%; object-fit:cover; }
+.rc-identity h2 { font-family:'Playfair Display',serif; font-size:22px; color:var(--white); }
+.rc-identity .rc-sub { font-size:13px; color:rgba(255,255,255,0.65); margin-top:4px; }
+.rc-identity .rc-badges { display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+.rc-badge {
+  padding:3px 12px; border-radius:20px; font-size:12px; font-weight:600;
+  background:rgba(201,151,43,0.2); color:var(--gold-light); border:1px solid rgba(201,151,43,0.3);
+}
+.rc-body { padding:24px 28px; }
+.rc-summary {
+  display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin-bottom:24px;
+}
+.rc-sum-box {
+  background:var(--light); border-radius:12px; padding:14px; text-align:center;
+  border-bottom:3px solid var(--border);
+}
+.rc-sum-box .val { font-size:24px; font-weight:700; font-family:'Playfair Display',serif; }
+.rc-sum-box .lbl { font-size:11px; color:var(--gray); margin-top:2px; text-transform:uppercase; letter-spacing:0.5px; }
+.rc-sum-box.pass { border-color:var(--green); }
+.rc-sum-box.pass .val { color:var(--green); }
+.rc-sum-box.fail { border-color:var(--red); }
+.rc-sum-box.fail .val { color:var(--red); }
+.rc-sum-box.pct-box { border-color:var(--gold); }
+.rc-sum-box.pct-box .val { color:var(--gold); }
+
+.rc-marks-title { font-size:13px; font-weight:700; color:var(--navy); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.8px; }
+.rc-marks-table { width:100%; border-collapse:collapse; border-radius:10px; overflow:hidden; }
+.rc-marks-table th {
+  background:var(--navy); color:var(--gold-light); padding:10px 14px;
+  text-align:left; font-size:12px; letter-spacing:0.5px;
+}
+.rc-marks-table td { padding:10px 14px; border-bottom:1px solid var(--border); font-size:14px; }
+.rc-marks-table tr:last-child td { border-bottom:none; }
+.rc-marks-table tr:hover td { background:var(--light); }
+.sub-bar-wrap { display:flex; align-items:center; gap:8px; }
+.sub-bar { flex:1; height:5px; border-radius:3px; background:var(--border); }
+.sub-bar-fill { height:100%; border-radius:3px; }
+.rc-rank-badge {
+  display:inline-flex; align-items:center; gap:6px;
+  background: linear-gradient(135deg,#fff7e0,#fff3cc); border:1px solid #e8c84a;
+  padding:6px 14px; border-radius:20px; font-size:13px; font-weight:700; color:#7a5200;
+  margin-top:16px;
+}
+.rc-print-btn {
+  width:100%; margin-top:18px; padding:12px; background:var(--navy); color:var(--white);
+  border:none; border-radius:10px; font-size:14px; font-weight:600; cursor:pointer;
+  font-family:'DM Sans',sans-serif; transition:all 0.2s;
+}
+.rc-print-btn:hover { background:#1a2e50; }
+
+/* Responsive */
+@media(max-width:768px){
+  .roll-lookup-wrap { padding:24px 16px; }
+  .rc-summary { grid-template-columns:1fr 1fr; }
+
+  .header-top { padding:12px 16px; }
+  .header-sub { padding:8px 16px; gap:12px; overflow-x:auto; }
+  .section { padding:20px 16px; }
+  .form-row { grid-template-columns:1fr; }
+  .admin-layout { flex-direction:column; }
+  .admin-sidebar { width:100%; padding:12px 0; }
+  .marks-grid { grid-template-columns:1fr 1fr; }
+}
+
+/* ===== IMPORT SHEET ===== */
+.import-steps {
+  display:flex; gap:16px; margin-bottom:24px; flex-wrap:wrap;
+}
+.import-step {
+  flex:1; min-width:200px; background:var(--white); border-radius:12px;
+  padding:18px; box-shadow:var(--shadow); display:flex; gap:14px; align-items:flex-start;
+  font-size:13px; color:var(--gray); line-height:1.6;
+}
+.import-step strong { color:var(--navy); display:block; margin-bottom:4px; }
+.import-step code {
+  background:#f0f4ff; color:#1d4ed8; padding:2px 6px; border-radius:4px;
+  font-size:12px; font-family:monospace;
+}
+.step-num {
+  width:32px; height:32px; border-radius:50%; background:var(--gold);
+  color:var(--navy); font-weight:700; font-size:15px;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.import-card {
+  background:var(--white); border-radius:16px; padding:28px;
+  box-shadow:var(--shadow); max-width:860px;
+}
+.import-dropzone {
+  border:2px dashed var(--gold); border-radius:14px; padding:44px 20px;
+  text-align:center; cursor:pointer; background:#fffbf0;
+  transition:all 0.2s; margin-bottom:20px;
+}
+.import-dropzone:hover, .import-dropzone.drag-over {
+  background:#fff3cc; border-color:var(--gold-light); transform:scale(1.01);
+}
+.drop-icon { font-size:52px; margin-bottom:10px; }
+.drop-title { font-size:16px; font-weight:600; color:var(--navy); }
+.drop-sub { font-size:13px; color:var(--gray); margin-top:4px; }
+.import-section-title {
+  font-size:13px; font-weight:700; color:var(--navy);
+  margin:20px 0 12px; text-transform:uppercase; letter-spacing:0.6px;
+}
+.mapping-grid {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px;
+}
+.mapping-row {
+  background:var(--light); border-radius:10px; padding:12px 14px;
+}
+.mapping-row label { font-size:11px; font-weight:700; color:var(--gray); display:block; margin-bottom:6px; text-transform:uppercase; }
+.mapping-row select { width:100%; padding:8px 10px; border-radius:6px; border:1.5px solid var(--border); font-size:13px; background:var(--white); font-family:'DM Sans',sans-serif; }
+.mapping-row select:focus { border-color:var(--gold); outline:none; }
+.import-success {
+  background:#d1fae5; color:#065f46; padding:16px 20px; border-radius:10px;
+  font-size:14px; border-left:4px solid var(--green); line-height:1.7;
+}
+.import-warn {
+  background:#fef3c7; color:#92400e; padding:12px 16px; border-radius:8px;
+  font-size:13px; margin-bottom:12px; border-left:3px solid var(--gold);
+}
+.detect-badge {
+  display:inline-flex; align-items:center; gap:4px;
+  background:#d1fae5; color:#065f46; border-radius:6px;
+  padding:2px 8px; font-size:11px; font-weight:600; margin:2px;
+}
+.detect-badge.warn { background:#fef3c7; color:#92400e; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-top">
+    <div class="school-brand">
+      <div class="school-logo">DCS</div>
+      <div class="school-name">
+        <h1>Delhi Convent School</h1>
+        <p>Excellence in Education Since 1985</p>
+      </div>
+    </div>
+    <div class="header-nav">
+      <button class="nav-btn outline" onclick="showPage('home')">🏠 Home</button>
+      <button class="nav-btn outline" onclick="showPage('results')">📋 Results</button>
+      <button class="nav-btn primary" id="adminNavBtn" onclick="showPage('login')">🔐 Admin</button>
+    </div>
+  </div>
+  <div class="header-sub">
+    <button class="sub-tab active" id="tab-home" onclick="showPage('home')">🏆 Top Performers</button>
+    <button class="sub-tab" id="tab-results" onclick="showPage('results')">📊 All Results</button>
+    <button class="sub-tab" id="tab-login" onclick="showPage('login')">⚙️ Admin Portal</button>
+  </div>
+</header>
+
+<!-- ============ HOME PAGE ============ -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <h2>🏅 Result <span>Declaration</span> 2024–25</h2>
+    <p>Celebrating Academic Excellence — Delhi Convent School</p>
+  </div>
+
+  <!-- ROLL NUMBER LOOKUP -->
+  <div class="roll-lookup-wrap">
+    <div class="roll-lookup-inner">
+      <h3>🔍 Check Your Result</h3>
+      <p>Enter your Roll Number to view your detailed marksheet instantly</p>
+      <div class="roll-input-row">
+        <input type="text" class="roll-input" id="rollInput" placeholder="Enter Roll Number e.g. 2024001"
+          onkeydown="if(event.key==='Enter') lookupRoll()">
+        <button class="roll-search-btn" onclick="lookupRoll()">Get Result →</button>
+      </div>
+      <div class="roll-error" id="rollError">❌ No student found with this Roll Number. Please check and try again.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">
+      <h3>🥇 Top 3 Performers</h3>
+      <div class="line"></div>
+    </div>
+    <div class="class-filter" id="classFilter">
+      <button class="filter-btn active" onclick="filterClass('all',this)">All Classes</button>
+    </div>
+    <div class="toppers-grid" id="toppersGrid">
+      <!-- Dynamically filled -->
+    </div>
+  </div>
+</div>
+
+<!-- ============ RESULTS PAGE ============ -->
+<div id="page-results" class="page">
+  <div class="section">
+    <div class="section-title">
+      <h3>📋 All Student Results</h3>
+      <div class="line"></div>
+    </div>
+    <div class="search-bar">
+      <input type="text" class="search-input" id="searchName" placeholder="🔍 Search by name or roll no..." oninput="renderResultsTable()">
+      <select class="search-input" id="filterClass" onchange="renderResultsTable()" style="max-width:160px">
+        <option value="">All Classes</option>
+      </select>
+      <select class="search-input" id="filterStatus" onchange="renderResultsTable()" style="max-width:160px">
+        <option value="">All Status</option>
+        <option value="Pass">Pass</option>
+        <option value="Fail">Fail</option>
+      </select>
+    </div>
+    <div class="results-table-wrap">
+      <table class="results-table" id="resultsTable">
+        <thead>
+          <tr>
+            <th>Rank</th><th>Photo</th><th>Name</th><th>Roll No.</th>
+            <th>Class</th><th>Obtained</th><th>Total</th><th>%</th><th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="resultsBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ============ LOGIN PAGE ============ -->
+<div id="page-login" class="page">
+  <div class="login-page">
+    <div class="login-card">
+      <div class="login-logo">
+        <div class="logo-circle">DCS</div>
+        <h3>Admin Portal</h3>
+        <p>Delhi Convent School — Staff Access</p>
+      </div>
+      <div class="login-error" id="loginError">❌ Invalid username or password.</div>
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" class="form-input" id="loginUser" placeholder="Enter username">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" class="form-input" id="loginPass" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()">
+      </div>
+      <button class="btn-login" onclick="doLogin()">Login to Admin Panel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ADMIN PAGE ============ -->
+<div id="page-admin" class="page">
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-title">⚙️ Admin Panel</div>
+      <ul class="sidebar-menu">
+        <li><button class="active" onclick="adminNav('dashboard',this)">📊 Dashboard</button></li>
+        <li><button onclick="adminNav('addStudent',this)">➕ Add Student</button></li>
+        <li><button onclick="adminNav('manageStudents',this)">👩‍🎓 Manage Students</button></li>
+        <li><button onclick="adminNav('subjects',this)">📚 Subjects & Marks</button></li>
+        <li><button onclick="adminNav('importSheet',this)">📥 Import Google Sheet</button></li>
+        <li><button onclick="doLogout()">🚪 Logout</button></li>
+      </ul>
+    </aside>
+    <main class="admin-main">
+
+      <!-- DASHBOARD -->
+      <div id="admin-dashboard" class="admin-section active">
+        <div class="admin-title">📊 Dashboard</div>
+        <div class="stats-row" id="statsRow"></div>
+        <p style="color:var(--gray);font-size:14px">Welcome, <strong>akashdeep</strong>. Manage all student results from here.</p>
+      </div>
+
+      <!-- ADD STUDENT -->
+      <div id="admin-addStudent" class="admin-section">
+        <div class="admin-title">➕ Add New Student</div>
+        <div class="admin-form">
+          <div class="success-msg" id="addSuccess">✅ Student added successfully!</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Full Name *</label>
+              <input type="text" class="form-input" id="aName" placeholder="Student full name">
+            </div>
+            <div class="form-group">
+              <label>Roll Number *</label>
+              <input type="text" class="form-input" id="aRoll" placeholder="e.g. 2024001">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Class *</label>
+              <select class="form-input" id="aClass"></select>
+            </div>
+            <div class="form-group">
+              <label>Father's Name</label>
+              <input type="text" class="form-input" id="aFather" placeholder="Father's name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Student Photo</label>
+            <div class="photo-upload-box" onclick="document.getElementById('aPhoto').click()">
+              <img id="aPhotoPreview" class="photo-preview" src="" style="display:none">
+              <div id="aPhotoText">📷 Click to upload photo</div>
+              <input type="file" id="aPhoto" accept="image/*" style="display:none" onchange="previewPhoto(this,'aPhotoPreview','aPhotoText')">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Marks per Subject</label>
+            <div id="addMarksGrid" class="marks-grid"></div>
+          </div>
+          <br>
+          <button class="btn-primary" onclick="addStudent()">➕ Add Student</button>
+        </div>
+      </div>
+
+      <!-- MANAGE STUDENTS -->
+      <div id="admin-manageStudents" class="admin-section">
+        <div class="admin-title">
+          👩‍🎓 Manage Students
+          <div class="search-bar" style="margin:0;width:auto">
+            <input type="text" class="search-input" id="mgmtSearch" placeholder="Search..." oninput="renderMgmtTable()" style="width:200px">
+            <select class="search-input" id="mgmtClass" onchange="renderMgmtTable()" style="width:140px"></select>
+          </div>
+        </div>
+
+        <!-- BULK ACTION BAR -->
+        <div id="bulkBar" style="display:none;align-items:center;gap:12px;flex-wrap:wrap;background:#fff7e0;border:1.5px solid var(--gold);border-radius:10px;padding:12px 18px;margin-bottom:14px">
+          <span id="bulkCount" style="font-size:14px;font-weight:700;color:var(--navy)">0 selected</span>
+          <button class="btn-danger" onclick="bulkDelete()" style="padding:8px 18px;font-size:13px">🗑️ Delete Selected</button>
+          <button class="btn-secondary" onclick="deselectAll()" style="font-size:13px">✖ Deselect All</button>
+        </div>
+
+        <div class="results-table-wrap">
+          <table class="mgmt-table">
+            <thead><tr>
+              <th style="width:40px;text-align:center">
+                <input type="checkbox" id="selectAllChk" title="Select All"
+                  style="width:17px;height:17px;cursor:pointer;accent-color:var(--gold)"
+                  onchange="toggleSelectAll(this)">
+              </th>
+              <th>Photo</th><th>Name</th><th>Roll No.</th><th>Class</th>
+              <th>%</th><th>Status</th><th>Actions</th>
+            </tr></thead>
+            <tbody id="mgmtBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SUBJECTS -->
+      <div id="admin-subjects" class="admin-section">
+        <div class="admin-title">📚 Subjects & Out-of Marks</div>
+        <div class="admin-form" style="max-width:600px">
+          <div class="tab-group">
+            <button class="tab-item active" onclick="subTab('list',this)">Subject List</button>
+            <button class="tab-item" onclick="subTab('add',this)">Add Subject</button>
+          </div>
+          <div id="subtab-list" class="tab-content active">
+            <table class="subjects-table" id="subjectsTable">
+              <thead><tr><th>#</th><th>Subject Name</th><th>Out of Marks</th><th>Action</th></tr></thead>
+              <tbody id="subjectsBody"></tbody>
+            </table>
+          </div>
+          <div id="subtab-add" class="tab-content">
+            <div class="form-group">
+              <label>Subject Name *</label>
+              <input type="text" class="form-input" id="newSubjectName" placeholder="e.g. Mathematics">
+            </div>
+            <div class="form-group">
+              <label>Out of Marks *</label>
+              <input type="number" class="form-input" id="newSubjectMax" placeholder="e.g. 100" min="1">
+            </div>
+            <button class="btn-primary" onclick="addSubject()">➕ Add Subject</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- IMPORT GOOGLE SHEET -->
+      <div id="admin-importSheet" class="admin-section">
+        <div class="admin-title">📥 Import from Google Sheet / Excel</div>
+
+        <div class="import-steps">
+          <div class="import-step"><span class="step-num">1</span><div><strong>Prepare your sheet</strong><br>Your Google Sheet / Excel must have these columns (in any order):<br>
+            <code>Name, Roll Number, Class, Father Name</code> + one column per subject (e.g. <code>English, Mathematics</code>)</div></div>
+          <div class="import-step"><span class="step-num">2</span><div><strong>Export from Google Sheets</strong><br>Go to <em>File → Download → Microsoft Excel (.xlsx)</em> or <em>CSV (.csv)</em></div></div>
+          <div class="import-step"><span class="step-num">3</span><div><strong>Upload here</strong><br>Drop the file below — data auto-detected and imported instantly</div></div>
+        </div>
+
+        <div class="import-card">
+          <!-- Sample download -->
+          <div style="margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+            <div>
+              <div style="font-size:15px;font-weight:600;color:var(--navy)">📂 Upload Your Sheet File</div>
+              <div style="font-size:12px;color:var(--gray);margin-top:2px">Supports: .xlsx, .xls, .csv — exported from Google Sheets or Excel</div>
+            </div>
+            <button class="btn-secondary" onclick="downloadSampleSheet()" style="font-size:12px">⬇️ Download Sample Template</button>
+          </div>
+
+          <!-- Drop zone -->
+          <div class="import-dropzone" id="importDropzone"
+            ondragover="event.preventDefault();this.classList.add('drag-over')"
+            ondragleave="this.classList.remove('drag-over')"
+            ondrop="handleSheetDrop(event)"
+            onclick="document.getElementById('sheetFileInput').click()">
+            <div class="drop-icon">📊</div>
+            <div class="drop-title">Click or drag & drop your sheet file</div>
+            <div class="drop-sub">.xlsx / .xls / .csv accepted</div>
+            <input type="file" id="sheetFileInput" accept=".xlsx,.xls,.csv" style="display:none" onchange="handleSheetFile(this.files[0])">
+          </div>
+
+          <!-- Column mapping -->
+          <div id="importMapping" style="display:none">
+            <div class="import-section-title">🔗 Column Mapping — We detected these columns:</div>
+            <div id="mappingGrid" class="mapping-grid"></div>
+            <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
+              <button class="btn-primary" onclick="confirmImport()">✅ Import Data</button>
+              <button class="btn-secondary" onclick="cancelImport()">✖ Cancel</button>
+            </div>
+          </div>
+
+          <!-- Preview table -->
+          <div id="importPreview" style="display:none">
+            <div class="import-section-title" id="previewTitle"></div>
+            <div style="overflow-x:auto;border-radius:10px;box-shadow:var(--shadow);margin-bottom:16px">
+              <table class="mgmt-table" id="previewTable">
+                <thead id="previewHead"></thead>
+                <tbody id="previewBody"></tbody>
+              </table>
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <button class="btn-primary" onclick="finalImport()">🚀 Confirm & Import All</button>
+              <button class="btn-secondary" onclick="cancelImport()">✖ Start Over</button>
+            </div>
+          </div>
+
+          <!-- Result -->
+          <div id="importResult" style="display:none;margin-top:16px"></div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ============ STUDENT RESULT CARD MODAL ============ -->
+<div class="result-card-overlay" id="resultCardOverlay" onclick="closeResultCard(event)">
+  <div class="result-card" id="resultCard">
+    <div class="rc-header">
+      <button class="rc-close" onclick="closeResultCardDirect()">×</button>
+      <div class="rc-photo" id="rcPhoto">👤</div>
+      <div class="rc-identity">
+        <h2 id="rcName">—</h2>
+        <div class="rc-sub" id="rcSub">—</div>
+        <div class="rc-badges" id="rcBadges"></div>
+      </div>
+    </div>
+    <div class="rc-body">
+      <div class="rc-summary" id="rcSummary"></div>
+      <div class="rc-marks-title">📝 Subject-wise Marks</div>
+      <table class="rc-marks-table">
+        <thead><tr><th>Subject</th><th>Obtained</th><th>Out Of</th><th>Performance</th><th>Grade</th></tr></thead>
+        <tbody id="rcMarksBody"></tbody>
+      </table>
+      <div id="rcRankBadge"></div>
+      <button class="rc-print-btn" onclick="window.print()">🖨️ Print / Download Marksheet</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ EDIT STUDENT MODAL ============ -->
+<div class="modal-overlay" id="editModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">✏️ Edit Student</div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="success-msg" id="editSuccess">✅ Changes saved!</div>
+    <div class="form-row">
+      <div class="form-group"><label>Full Name</label><input type="text" class="form-input" id="eName"></div>
+      <div class="form-group"><label>Roll Number</label><input type="text" class="form-input" id="eRoll"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Class</label><select class="form-input" id="eClass"></select></div>
+      <div class="form-group"><label>Father's Name</label><input type="text" class="form-input" id="eFather"></div>
+    </div>
+    <div class="form-group">
+      <label>Student Photo</label>
+      <div class="photo-upload-box" onclick="document.getElementById('ePhoto').click()">
+        <img id="ePhotoPreview" class="photo-preview" src="" style="display:block">
+        <div id="ePhotoText" style="font-size:12px;color:var(--gray)">Click to change photo</div>
+        <input type="file" id="ePhoto" accept="image/*" style="display:none" onchange="previewPhoto(this,'ePhotoPreview','ePhotoText')">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Marks</label>
+      <div id="editMarksGrid" class="marks-grid"></div>
+    </div>
+    <br>
+    <div style="display:flex;gap:12px">
+      <button class="btn-primary" onclick="saveEdit()">💾 Save Changes</button>
+      <button class="btn-secondary" onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- DELETE CONFIRM MODAL -->
+<div class="modal-overlay" id="deleteModal" style="z-index:2000">
+  <div class="modal" style="max-width:380px;text-align:center;padding:36px 32px">
+    <div style="font-size:52px;margin-bottom:12px">🗑️</div>
+    <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy);margin-bottom:8px">Delete Student?</div>
+    <div style="font-size:14px;color:var(--gray);margin-bottom:6px">You are about to permanently delete:</div>
+    <div id="deleteStudentName" style="font-size:16px;font-weight:700;color:var(--red);margin-bottom:20px;padding:10px;background:#fee2e2;border-radius:8px"></div>
+    <div style="font-size:13px;color:var(--gray);margin-bottom:24px">This action cannot be undone. All marks and data for this student will be removed.</div>
+    <div style="display:flex;gap:10px;justify-content:center">
+      <button id="confirmDelBtn" style="padding:11px 28px;background:#dc2626;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;" onclick="confirmDelete()">Yes, Delete</button>
+      <button style="padding:11px 28px;background:var(--light);color:var(--navy);border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;" onclick="closeDeleteModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+// ========== DATA STORE ==========
+let subjects = [
+  {name:'English', max:100},
+  {name:'Hindi', max:100},
+  {name:'Mathematics', max:100},
+  {name:'Science', max:100},
+  {name:'Social Studies', max:100},
+];
+
+const classes = ['Class 1','Class 2','Class 3','Class 4','Class 5',
+                 'Class 6','Class 7','Class 8','Class 9','Class 10',
+                 'Class 11','Class 12'];
+
+let students = [
+  { id:1, name:'Aanya Sharma', roll:'2024001', cls:'Class 10', father:'Rajesh Sharma', photo:'', marks:{English:92,Hindi:88,Mathematics:96,Science:94,'Social Studies':89} },
+  { id:2, name:'Rohan Gupta', roll:'2024002', cls:'Class 10', father:'Sunil Gupta', photo:'', marks:{English:85,Hindi:80,Mathematics:90,Science:88,'Social Studies':82} },
+  { id:3, name:'Priya Verma', roll:'2024003', cls:'Class 10', father:'Amit Verma', photo:'', marks:{English:78,Hindi:75,Mathematics:72,Science:80,'Social Studies':76} },
+  { id:4, name:'Kabir Singh', roll:'2024004', cls:'Class 9', father:'Harpreet Singh', photo:'', marks:{English:95,Hindi:91,Mathematics:97,Science:93,'Social Studies':90} },
+  { id:5, name:'Sneha Jain', roll:'2024005', cls:'Class 9', father:'Deepak Jain', photo:'', marks:{English:88,Hindi:84,Mathematics:91,Science:86,'Social Studies':83} },
+  { id:6, name:'Arjun Patel', roll:'2024006', cls:'Class 9', father:'Kiran Patel', photo:'', marks:{English:70,Hindi:68,Mathematics:65,Science:72,'Social Studies':69} },
+  { id:7, name:'Divya Nair', roll:'2024007', cls:'Class 8', father:'Suresh Nair', photo:'', marks:{English:94,Hindi:90,Mathematics:98,Science:96,'Social Studies':92} },
+  { id:8, name:'Ishaan Mehta', roll:'2024008', cls:'Class 8', father:'Vivek Mehta', photo:'', marks:{English:82,Hindi:78,Mathematics:85,Science:80,'Social Studies':77} },
+];
+
+let editingId = null;
+
+// ========== UTILS ==========
+function calcMarks(student){
+  const subs = subjects.map(s=>s.name);
+  let got=0, total=0;
+  subjects.forEach(s=>{
+    const m = student.marks[s.name]||0;
+    got+=m; total+=s.max;
+  });
+  const pct = total>0?Math.round((got/total)*100):0;
+  const pass = subjects.every(s=>(student.marks[s.name]||0)>=(s.max*0.33));
+  return {got, total, pct, status: pass?'Pass':'Fail'};
+}
+
+function getToppers(cls='all'){
+  let pool = cls==='all'?[...students]:students.filter(s=>s.cls===cls);
+  return pool.map(s=>({...s, ...calcMarks(s)}))
+    .sort((a,b)=>b.pct-a.pct).slice(0,3);
+}
+
+function getClassList(){
+  return [...new Set(students.map(s=>s.cls))].sort();
+}
+
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+// ========== PAGE NAVIGATION ==========
+const TABS = {home:'tab-home',results:'tab-results',login:'tab-login',admin:'tab-login'};
+function showPage(name){
+  if(name==='admin' && !sessionStorage.getItem('adminLoggedIn')){ showPage('login'); return; }
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sub-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  const tab = TABS[name];
+  if(tab) document.getElementById(tab).classList.add('active');
+  if(name==='home') renderHome();
+  if(name==='results') renderResultsPage();
+  if(name==='admin') renderAdmin();
+}
+
+// ========== HOME PAGE ==========
+function renderHome(){
+  // Class filter buttons
+  const cf = document.getElementById('classFilter');
+  cf.innerHTML = '<button class="filter-btn active" onclick="filterClass(\'all\',this)">All Classes</button>';
+  getClassList().forEach(c=>{
+    cf.innerHTML += `<button class="filter-btn" onclick="filterClass('${c}',this)">${c}</button>`;
+  });
+  renderToppers('all');
+}
+
+function filterClass(cls, btn){
+  document.querySelectorAll('#classFilter .filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderToppers(cls);
+}
+
+function renderToppers(cls){
+  const toppers = getToppers(cls);
+  const grid = document.getElementById('toppersGrid');
+  if(!toppers.length){ grid.innerHTML='<p style="color:var(--gray)">No students found.</p>'; return; }
+  const medals=['🥇','🥈','🥉'];
+  grid.innerHTML = toppers.map((s,i)=>`
+    <div class="topper-card">
+      <div class="topper-rank rank-${i+1}">${medals[i]}</div>
+      <div class="topper-photo-wrap">
+        ${s.photo?`<img src="${s.photo}" alt="${s.name}">`:`<div class="topper-photo-placeholder">👩‍🎓</div>`}
+      </div>
+      <div class="topper-info">
+        <div class="topper-name">${s.name}</div>
+        <div class="topper-meta">
+          <span class="meta-badge class">${s.cls}</span>
+          <span class="meta-badge">Roll: ${s.roll}</span>
+          <span class="meta-badge">${s.father||''}</span>
+        </div>
+        <div class="topper-marks">
+          <div class="marks-pct">${s.pct}%</div>
+          <div class="marks-detail">
+            <div>${s.got}/${s.total} marks</div>
+            <div style="color:${s.status==='Pass'?'var(--green)':'var(--red)'};font-weight:600">${s.status}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ========== RESULTS PAGE ==========
+function renderResultsPage(){
+  const sel = document.getElementById('filterClass');
+  sel.innerHTML = '<option value="">All Classes</option>';
+  getClassList().forEach(c=>{ sel.innerHTML+=`<option>${c}</option>`; });
+  renderResultsTable();
+}
+
+function renderResultsTable(){
+  const q=(document.getElementById('searchName').value||'').toLowerCase();
+  const cls=document.getElementById('filterClass').value;
+  const st=document.getElementById('filterStatus').value;
+  let data = students.map(s=>({...s,...calcMarks(s)}))
+    .sort((a,b)=>b.pct-a.pct)
+    .map((s,i)=>({...s, rank:i+1}));
+  if(q) data=data.filter(s=>s.name.toLowerCase().includes(q)||s.roll.includes(q));
+  if(cls) data=data.filter(s=>s.cls===cls);
+  if(st) data=data.filter(s=>s.status===st);
+  const body=document.getElementById('resultsBody');
+  body.innerHTML=data.map(s=>`
+    <tr>
+      <td><span class="rank-badge ${s.rank<=3?'rank-'+s.rank:''}" style="${s.rank>3?'background:var(--light);color:var(--gray)':''}">${s.rank<=3?['🥇','🥈','🥉'][s.rank-1]:s.rank}</span></td>
+      <td>${s.photo?`<img src="${s.photo}" class="student-thumb">`:`<span style="font-size:20px">👤</span>`}</td>
+      <td><strong>${s.name}</strong></td>
+      <td>${s.roll}</td>
+      <td><span class="meta-badge class">${s.cls}</span></td>
+      <td>${s.got}</td><td>${s.total}</td>
+      <td>
+        <div class="pct-bar-wrap">
+          <div class="pct-bar"><div class="pct-bar-fill" style="width:${s.pct}%"></div></div>
+          <strong>${s.pct}%</strong>
+        </div>
+      </td>
+      <td><span style="color:${s.status==='Pass'?'var(--green)':'var(--red)'};font-weight:600">${s.status==='Pass'?'✅':'❌'} ${s.status}</span></td>
+    </tr>
+  `).join('');
+}
+
+// ========== LOGIN ==========
+function doLogin(){
+  const u=document.getElementById('loginUser').value;
+  const p=document.getElementById('loginPass').value;
+  if(u==='akashdeep'&&p==='akash@223'){
+    sessionStorage.setItem('adminLoggedIn','1');
+    document.getElementById('loginError').style.display='none';
+    document.getElementById('adminNavBtn').textContent='🔐 Admin Panel';
+    showPage('admin');
+  } else {
+    document.getElementById('loginError').style.display='block';
+  }
+}
+
+function doLogout(){
+  sessionStorage.removeItem('adminLoggedIn');
+  document.getElementById('adminNavBtn').textContent='🔐 Admin';
+  showPage('login');
+  toast('Logged out successfully.');
+}
+
+// ========== ADMIN ==========
+function adminNav(sec, btn){
+  document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.admin-sidebar .sidebar-menu button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('admin-'+sec).classList.add('active');
+  btn.classList.add('active');
+  if(sec==='dashboard') renderDashboard();
+  if(sec==='addStudent') renderAddForm();
+  if(sec==='manageStudents') renderMgmtTable();
+  if(sec==='subjects') renderSubjectsSection();
+  if(sec==='importSheet') resetImport();
+}
+
+function renderAdmin(){
+  renderDashboard();
+  populateClassSelects();
+}
+
+function renderDashboard(){
+  const sr=document.getElementById('statsRow');
+  const clsList=getClassList();
+  sr.innerHTML=`
+    <div class="stat-card"><div class="val">${students.length}</div><div class="lbl">Total Students</div></div>
+    <div class="stat-card" style="border-color:var(--green)"><div class="val">${students.filter(s=>calcMarks(s).status==='Pass').length}</div><div class="lbl">Passed</div></div>
+    <div class="stat-card" style="border-color:var(--red)"><div class="val">${students.filter(s=>calcMarks(s).status==='Fail').length}</div><div class="lbl">Failed</div></div>
+    <div class="stat-card" style="border-color:var(--blue)"><div class="val">${clsList.length}</div><div class="lbl">Classes</div></div>
+    <div class="stat-card" style="border-color:#8b5cf6"><div class="val">${subjects.length}</div><div class="lbl">Subjects</div></div>
+  `;
+}
+
+function populateClassSelects(){
+  ['aClass','eClass','mgmtClass'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el) return;
+    const prev=el.value;
+    el.innerHTML = (id==='mgmtClass'?'<option value="">All Classes</option>':'');
+    classes.forEach(c=>{ el.innerHTML+=`<option ${c===prev?'selected':''}>${c}</option>`; });
+  });
+}
+
+// Add Student Form marks grid
+function renderAddForm(){
+  populateClassSelects();
+  const grid=document.getElementById('addMarksGrid');
+  grid.innerHTML=subjects.map(s=>`
+    <div class="form-group">
+      <label>${s.name} (/${s.max})</label>
+      <input type="number" class="form-input" id="am_${s.name.replace(/\s/g,'_')}" min="0" max="${s.max}" placeholder="0">
+    </div>
+  `).join('');
+}
+
+function addStudent(){
+  const name=document.getElementById('aName').value.trim();
+  const roll=document.getElementById('aRoll').value.trim();
+  const cls=document.getElementById('aClass').value;
+  const father=document.getElementById('aFather').value.trim();
+  const photo=document.getElementById('aPhotoPreview').style.display!=='none'?document.getElementById('aPhotoPreview').src:'';
+  if(!name||!roll){ toast('⚠️ Name and Roll No. are required!'); return; }
+  const marks={};
+  subjects.forEach(s=>{ marks[s.name]=parseInt(document.getElementById('am_'+s.name.replace(/\s/g,'_')).value)||0; });
+  const newId=String(Date.now());
+  students.push({id:newId,name,roll,cls,father,photo,marks});
+  document.getElementById('aName').value='';
+  document.getElementById('aRoll').value='';
+  document.getElementById('aFather').value='';
+  document.getElementById('aPhotoPreview').style.display='none';
+  document.getElementById('aPhotoText').style.display='block';
+  renderAddForm();
+  const msg=document.getElementById('addSuccess');
+  msg.style.display='block'; setTimeout(()=>msg.style.display='none',3000);
+  toast('✅ Student added!');
+  renderDashboard();
+}
+
+// Manage Students Table
+function renderMgmtTable(){
+  const q=(document.getElementById('mgmtSearch').value||'').toLowerCase();
+  const cls=document.getElementById('mgmtClass').value;
+  populateClassSelects();
+  let data=students.map(s=>({...s,...calcMarks(s)}));
+  if(q) data=data.filter(s=>s.name.toLowerCase().includes(q)||s.roll.includes(q));
+  if(cls) data=data.filter(s=>s.cls===cls);
+  document.getElementById('mgmtBody').innerHTML=data.map(s=>`
+    <tr id="row_${s.id}">
+      <td style="text-align:center">
+        <input type="checkbox" class="row-chk" data-id="${s.id}"
+          style="width:17px;height:17px;cursor:pointer;accent-color:var(--gold)"
+          onchange="onRowCheck()">
+      </td>
+      <td>${s.photo?`<img src="${s.photo}" class="student-thumb">`:'<span>👤</span>'}</td>
+      <td><strong>${s.name}</strong></td>
+      <td>${s.roll}</td>
+      <td><span class="meta-badge class">${s.cls}</span></td>
+      <td><strong>${s.pct}%</strong></td>
+      <td><span style="color:${s.status==='Pass'?'var(--green)':'var(--red)'};font-weight:600">${s.status}</span></td>
+      <td style="display:flex;gap:6px">
+        <button class="btn-edit" data-id="${s.id}" onclick="openEditById(this)">✏️ Edit</button>
+        <button class="btn-danger" data-id="${s.id}" onclick="deleteStudentById(this)">🗑 Del</button>
+      </td>
+    </tr>
+  `).join('');
+  // reset header checkbox & bulk bar
+  const hdr = document.getElementById('selectAllChk');
+  if(hdr) hdr.checked = false;
+  updateBulkBar();
+}
+
+function openEditById(btn){ openEdit(btn.getAttribute('data-id')); }
+function deleteStudentById(btn){ deleteStudent(btn.getAttribute('data-id')); }
+
+function openEdit(id){
+  id = String(id);
+  editingId=id;
+  const s=students.find(x=>String(x.id)===id);
+  if(!s) return;
+  document.getElementById('eName').value=s.name;
+  document.getElementById('eRoll').value=s.roll;
+  document.getElementById('eFather').value=s.father||'';
+  populateClassSelects();
+  document.getElementById('eClass').value=s.cls;
+  const pp=document.getElementById('ePhotoPreview');
+  pp.src=s.photo||''; pp.style.display='block';
+  // Marks grid
+  const grid=document.getElementById('editMarksGrid');
+  grid.innerHTML=subjects.map(sub=>`
+    <div class="form-group">
+      <label>${sub.name} (/${sub.max})</label>
+      <input type="number" class="form-input" id="em_${sub.name.replace(/\s/g,'_')}" min="0" max="${sub.max}" value="${s.marks[sub.name]||0}">
+    </div>
+  `).join('');
+  document.getElementById('editModal').classList.add('open');
+}
+
+function saveEdit(){
+  const s=students.find(x=>String(x.id)===String(editingId));
+  if(!s) return;
+  s.name=document.getElementById('eName').value.trim();
+  s.roll=document.getElementById('eRoll').value.trim();
+  s.cls=document.getElementById('eClass').value;
+  s.father=document.getElementById('eFather').value.trim();
+  const np=document.getElementById('ePhotoPreview').src;
+  if(np&&!np.endsWith('undefined')) s.photo=np;
+  subjects.forEach(sub=>{ s.marks[sub.name]=parseInt(document.getElementById('em_'+sub.name.replace(/\s/g,'_')).value)||0; });
+  renderMgmtTable();
+  const msg=document.getElementById('editSuccess');
+  msg.style.display='block'; setTimeout(()=>msg.style.display='none',3000);
+  toast('✅ Student updated!');
+  renderDashboard();
+}
+
+let _pendingDeleteId = null;
+
+function deleteStudent(id){
+  id = String(id);
+  const s = students.find(x => String(x.id) === id);
+  if(!s) return;
+  _pendingDeleteId = id;
+  document.getElementById('deleteStudentName').textContent = s.name + ' (Roll: ' + s.roll + ')';
+  document.getElementById('deleteModal').classList.add('open');
+}
+
+function confirmDelete(){
+  if(!_pendingDeleteId) return;
+  students = students.filter(s => String(s.id) !== _pendingDeleteId);
+  _pendingDeleteId = null;
+  closeDeleteModal();
+  renderMgmtTable();
+  renderDashboard();
+  toast('🗑️ Student deleted successfully.');
+}
+
+function closeDeleteModal(){
+  _pendingDeleteId = null;
+  document.getElementById('deleteModal').classList.remove('open');
+}
+
+function closeModal(){ document.getElementById('editModal').classList.remove('open'); }
+
+// ========== SUBJECTS ==========
+function renderSubjectsSection(){
+  renderSubjectsTable();
+}
+
+function renderSubjectsTable(){
+  const body=document.getElementById('subjectsBody');
+  body.innerHTML=subjects.map((s,i)=>`
+    <tr>
+      <td>${i+1}</td>
+      <td><input type="text" class="form-input" value="${s.name}" id="sn_${i}" style="width:100%"></td>
+      <td><input type="number" class="form-input" value="${s.max}" id="sm_${i}" min="1" style="width:80px"></td>
+      <td style="display:flex;gap:6px">
+        <button class="btn-edit" onclick="saveSubject(${i})">💾 Save</button>
+        <button class="btn-danger" onclick="deleteSubject(${i})">🗑</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function saveSubject(i){
+  const n=document.getElementById('sn_'+i).value.trim();
+  const m=parseInt(document.getElementById('sm_'+i).value);
+  if(!n||!m){ toast('⚠️ Fill name and marks!'); return; }
+  const oldName=subjects[i].name;
+  subjects[i]={name:n,max:m};
+  // Update student marks keys if name changed
+  if(oldName!==n){
+    students.forEach(s=>{
+      if(s.marks[oldName]!==undefined){ s.marks[n]=s.marks[oldName]; delete s.marks[oldName]; }
+    });
+  }
+  toast('✅ Subject updated!');
+}
+
+function deleteSubject(i){
+  if(!confirm('Delete this subject? All student marks for it will be removed.')) return;
+  const name=subjects[i].name;
+  subjects.splice(i,1);
+  students.forEach(s=>{ delete s.marks[name]; });
+  renderSubjectsTable(); toast('🗑 Subject deleted.');
+}
+
+function addSubject(){
+  const n=document.getElementById('newSubjectName').value.trim();
+  const m=parseInt(document.getElementById('newSubjectMax').value);
+  if(!n||!m){ toast('⚠️ Subject name and max marks required!'); return; }
+  if(subjects.find(s=>s.name.toLowerCase()===n.toLowerCase())){ toast('⚠️ Subject already exists!'); return; }
+  subjects.push({name:n,max:m});
+  students.forEach(s=>{ s.marks[n]=0; });
+  document.getElementById('newSubjectName').value='';
+  document.getElementById('newSubjectMax').value='';
+  subTab('list'); renderSubjectsTable();
+  toast('✅ Subject added!');
+}
+
+function subTab(name, btn){
+  document.querySelectorAll('.tab-item').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.getElementById('subtab-'+name).classList.add('active');
+  if(btn) btn.classList.add('active');
+  else document.querySelectorAll('.tab-item')[name==='list'?0:1].classList.add('active');
+}
+
+// ========== PHOTO UPLOAD ==========
+function previewPhoto(input, previewId, textId){
+  const file=input.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const img=document.getElementById(previewId);
+    img.src=e.target.result; img.style.display='block';
+    document.getElementById(textId).style.display='none';
+  };
+  reader.readAsDataURL(file);
+}
+
+// ========== GOOGLE SHEET / EXCEL IMPORT ==========
+let importedRows = [];   // raw parsed rows (array of objects)
+let importHeaders = [];  // column headers from file
+let mappedCols = {};     // { fieldKey: colHeader }
+
+const FIELD_LABELS = {
+  name:   'Student Name',
+  roll:   'Roll Number',
+  cls:    'Class',
+  father: "Father's Name",
+};
+
+// Smart auto-detect: match header strings to known fields
+const FIELD_ALIASES = {
+  name:   ['name','student name','student','full name','fullname','sname'],
+  roll:   ['roll','roll no','roll number','rollno','rollnumber','roll no.','sr no','sr. no','id'],
+  cls:    ['class','class name','section','grade','std','standard'],
+  father: ['father','father name',"father's name",'fathers name','parent'],
+};
+
+function headerMatchesField(header, field){
+  const h = header.toLowerCase().trim();
+  return FIELD_ALIASES[field].some(alias => h.includes(alias));
+}
+
+function autoDetectMapping(headers){
+  const map = {};
+  Object.keys(FIELD_ALIASES).forEach(field=>{
+    const match = headers.find(h=>headerMatchesField(h,field));
+    if(match) map[field]=match;
+  });
+  return map;
+}
+
+function detectSubjectColumns(headers, coreMapping){
+  const coreCols = Object.values(coreMapping);
+  return headers.filter(h=> !coreCols.includes(h));
+}
+
+function resetImport(){
+  importedRows=[]; importHeaders=[]; mappedCols={};
+  document.getElementById('importDropzone').style.display='block';
+  document.getElementById('importMapping').style.display='none';
+  document.getElementById('importPreview').style.display='none';
+  document.getElementById('importResult').style.display='none';
+  document.getElementById('sheetFileInput').value='';
+  document.getElementById('importDropzone').classList.remove('drag-over');
+}
+function cancelImport(){ resetImport(); }
+
+function handleSheetDrop(e){
+  e.preventDefault();
+  document.getElementById('importDropzone').classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if(file) handleSheetFile(file);
+}
+
+function handleSheetFile(file){
+  if(!file){ toast('⚠️ No file selected'); return; }
+  const name = file.name.toLowerCase();
+  const isCsv = name.endsWith('.csv');
+  const isXlsx = name.endsWith('.xlsx')||name.endsWith('.xls');
+  if(!isCsv&&!isXlsx){ toast('⚠️ Please upload .xlsx, .xls or .csv file'); return; }
+
+  const reader = new FileReader();
+  reader.onload = function(e){
+    try{
+      let wb;
+      if(isCsv){
+        wb = XLSX.read(e.target.result, {type:'string'});
+      } else {
+        wb = XLSX.read(e.target.result, {type:'array'});
+      }
+      const ws = wb.Sheets[wb.SheetNames[0]];
+      const json = XLSX.utils.sheet_to_json(ws, {defval:''});
+      if(!json.length){ toast('⚠️ Sheet appears to be empty!'); return; }
+      importHeaders = Object.keys(json[0]);
+      importedRows = json;
+      showMappingUI();
+    } catch(err){
+      toast('❌ Could not read file. Make sure it is a valid Excel/CSV file.');
+      console.error(err);
+    }
+  };
+  if(isCsv) reader.readAsText(file);
+  else reader.readAsArrayBuffer(file);
+}
+
+function showMappingUI(){
+  const autoMap = autoDetectMapping(importHeaders);
+  mappedCols = {...autoMap};
+  const subjectCols = detectSubjectColumns(importHeaders, autoMap);
+
+  const grid = document.getElementById('mappingGrid');
+  const colOptions = importHeaders.map(h=>`<option value="${h}">${h}</option>`).join('');
+  const noneOpt = `<option value="">— Not in sheet —</option>`;
+
+  let html = '';
+  // Core field mappings
+  Object.entries(FIELD_LABELS).forEach(([field, label])=>{
+    const selected = autoMap[field]||'';
+    html += `<div class="mapping-row">
+      <label>${label} ${field==='name'||field==='roll'?'*':''}</label>
+      <select id="map_${field}" onchange="mappedCols['${field}']=this.value">
+        ${noneOpt}
+        ${importHeaders.map(h=>`<option value="${h}" ${h===selected?'selected':''}>${h}</option>`).join('')}
+      </select>
+    </div>`;
+  });
+
+  grid.innerHTML = html;
+
+  // Show detected badges
+  let detectedHtml = '<div style="margin-top:12px;font-size:13px;color:var(--navy)"><strong>Auto-detected:</strong> ';
+  Object.entries(autoMap).forEach(([f,col])=>{
+    detectedHtml += `<span class="detect-badge">✅ ${FIELD_LABELS[f]} → <em>${col}</em></span>`;
+  });
+  if(subjectCols.length){
+    detectedHtml += `<br><span style="font-size:12px;color:var(--gray);margin-top:6px;display:block">📚 Potential subject columns: `;
+    subjectCols.forEach(c=>{ detectedHtml+=`<span class="detect-badge">${c}</span>`; });
+    detectedHtml += '</span>';
+  }
+  detectedHtml += '</div>';
+
+  grid.innerHTML += detectedHtml;
+  document.getElementById('importDropzone').style.display='none';
+  document.getElementById('importMapping').style.display='block';
+}
+
+function confirmImport(){
+  // Read mapping from selects
+  Object.keys(FIELD_LABELS).forEach(f=>{
+    const el = document.getElementById('map_'+f);
+    if(el) mappedCols[f] = el.value;
+  });
+
+  if(!mappedCols.name || !mappedCols.roll){
+    toast('⚠️ Name and Roll Number columns are required!'); return;
+  }
+
+  // Detect subject columns (everything not mapped to a core field)
+  const coreCols = Object.values(mappedCols).filter(Boolean);
+  const subjectCols = importHeaders.filter(h=> !coreCols.includes(h));
+
+  // Auto-add new subjects found in sheet
+  subjectCols.forEach(col=>{
+    const trimmed = col.trim();
+    if(trimmed && !subjects.find(s=>s.name.toLowerCase()===trimmed.toLowerCase())){
+      subjects.push({name:trimmed, max:100});
+    }
+  });
+
+  // Build preview rows
+  const preview = importedRows.map((row,i)=>{
+    const name = String(row[mappedCols.name]||'').trim();
+    const roll = String(row[mappedCols.roll]||'').trim();
+    const cls  = mappedCols.cls  ? String(row[mappedCols.cls]||'').trim()  : '';
+    const father=mappedCols.father?String(row[mappedCols.father]||'').trim():'';
+    const marks={};
+    subjectCols.forEach(col=>{ marks[col.trim()] = parseInt(row[col])||0; });
+    return {name,roll,cls,father,marks,_valid:!!(name&&roll)};
+  }).filter(r=>r._valid);
+
+  if(!preview.length){ toast('⚠️ No valid rows found (need at least Name + Roll No.)'); return; }
+
+  // Store for final import
+  window._importPreviewRows = preview;
+  window._importSubjectCols = subjectCols;
+  showPreview(preview, subjectCols);
+}
+
+function showPreview(rows, subjectCols){
+  document.getElementById('importMapping').style.display='none';
+  document.getElementById('importPreview').style.display='block';
+  document.getElementById('previewTitle').textContent =
+    `👀 Preview — ${rows.length} student(s) ready to import (first 10 shown)`;
+
+  // Head
+  const subCols = subjectCols.map(c=>c.trim());
+  document.getElementById('previewHead').innerHTML = `<tr>
+    <th>#</th><th>Name</th><th>Roll No.</th><th>Class</th><th>Father</th>
+    ${subCols.map(s=>`<th>${s}</th>`).join('')}
+    <th>Status</th>
+  </tr>`;
+
+  // Body (max 10)
+  const display = rows.slice(0,10);
+  document.getElementById('previewBody').innerHTML = display.map((r,i)=>{
+    const exists = students.find(s=>s.roll===r.roll);
+    return `<tr>
+      <td>${i+1}</td>
+      <td>${r.name}</td>
+      <td>${r.roll}</td>
+      <td>${r.cls||'—'}</td>
+      <td>${r.father||'—'}</td>
+      ${subCols.map(s=>`<td>${r.marks[s]??'—'}</td>`).join('')}
+      <td><span style="font-size:11px;padding:2px 8px;border-radius:10px;font-weight:600;background:${exists?'#fef3c7':'#d1fae5'};color:${exists?'#92400e':'#065f46'}">${exists?'Update':'New'}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function finalImport(){
+  const rows = window._importPreviewRows || [];
+  const subjectCols = (window._importSubjectCols||[]).map(c=>c.trim());
+  let added=0, updated=0;
+
+  rows.forEach(r=>{
+    const existing = students.find(s=>s.roll===r.roll);
+    // Normalize class: if it's just a number, prefix "Class "
+    let cls = r.cls;
+    if(cls && /^\d+$/.test(cls.trim())) cls = 'Class '+cls.trim();
+    if(!cls) cls = classes[0];
+
+    if(existing){
+      existing.name   = r.name   || existing.name;
+      existing.cls    = cls      || existing.cls;
+      existing.father = r.father || existing.father;
+      subjectCols.forEach(s=>{ existing.marks[s] = r.marks[s]??existing.marks[s]??0; });
+      updated++;
+    } else {
+      const marks={};
+      subjects.forEach(s=>{ marks[s.name] = r.marks[s.name]??0; });
+      subjectCols.forEach(s=>{ marks[s] = r.marks[s]??0; });
+      students.push({id:String(Date.now()+Math.floor(Math.random()*10000)), name:r.name, roll:r.roll, cls, father:r.father, photo:'', marks});
+      added++;
+    }
+  });
+
+  renderDashboard();
+  document.getElementById('importPreview').style.display='none';
+  document.getElementById('importDropzone').style.display='block';
+  const res = document.getElementById('importResult');
+  res.style.display='block';
+  res.innerHTML = `<div class="import-success">
+    🎉 <strong>Import Successful!</strong><br>
+    ✅ <strong>${added}</strong> new student(s) added &nbsp;|&nbsp;
+    🔄 <strong>${updated}</strong> existing student(s) updated<br>
+    📚 Subjects auto-added from sheet: <strong>${subjectCols.join(', ')||'none'}</strong><br>
+    <br><button class="btn-primary" onclick="resetImport()" style="margin-top:4px">📥 Import Another Sheet</button>
+    &nbsp;<button class="btn-secondary" onclick="adminNav('manageStudents', document.querySelector('.sidebar-menu button:nth-child(3)'))">👩‍🎓 View Students</button>
+  </div>`;
+  toast(`✅ Imported: ${added} new, ${updated} updated!`);
+}
+
+// Sample template download
+function downloadSampleSheet(){
+  const sampleData = [
+    {Name:'Riya Sharma','Roll Number':'2025001', Class:'Class 10',"Father's Name":'Suresh Sharma',
+     English:88, Hindi:76, Mathematics:92, Science:85,'Social Studies':78},
+    {Name:'Mohit Verma','Roll Number':'2025002', Class:'Class 10',"Father's Name":'Anil Verma',
+     English:72, Hindi:68, Mathematics:80, Science:74,'Social Studies':70},
+    {Name:'Preet Kaur', 'Roll Number':'2025003', Class:'Class 9', "Father's Name":'Gurpreet Singh',
+     English:95, Hindi:90, Mathematics:97, Science:93,'Social Studies':91},
+  ];
+  const ws = XLSX.utils.json_to_sheet(sampleData);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Students');
+  XLSX.writeFile(wb, 'DCS_Student_Template.xlsx');
+  toast('📥 Sample template downloaded!');
+}
+
+// ========== ROLL NUMBER LOOKUP ==========
+function lookupRoll(){
+  const roll = document.getElementById('rollInput').value.trim();
+  const errEl = document.getElementById('rollError');
+  errEl.style.display = 'none';
+  if(!roll){ errEl.textContent='⚠️ Please enter a roll number.'; errEl.style.display='block'; return; }
+  const student = students.find(s => s.roll.toLowerCase() === roll.toLowerCase());
+  if(!student){ errEl.textContent='❌ No student found with Roll No. "'+roll+'". Please check and try again.'; errEl.style.display='block'; return; }
+  showResultCard(student);
+  document.getElementById('rollInput').value='';
+}
+
+function getGrade(pct){
+  if(pct>=90) return {g:'A+', color:'#16a34a'};
+  if(pct>=80) return {g:'A',  color:'#2563eb'};
+  if(pct>=70) return {g:'B+', color:'#7c3aed'};
+  if(pct>=60) return {g:'B',  color:'#0891b2'};
+  if(pct>=50) return {g:'C',  color:'#d97706'};
+  if(pct>=33) return {g:'D',  color:'#ea580c'};
+  return {g:'F', color:'#dc2626'};
+}
+
+function showResultCard(s){
+  const {got, total, pct, status} = calcMarks(s);
+
+  // Rank within class
+  const classRanked = students.map(x=>({...x,...calcMarks(x)}))
+    .filter(x=>x.cls===s.cls).sort((a,b)=>b.pct-a.pct);
+  const rank = classRanked.findIndex(x=>x.id===s.id)+1;
+
+  // Photo
+  const photoEl = document.getElementById('rcPhoto');
+  photoEl.innerHTML = s.photo ? `<img src="${s.photo}" alt="${s.name}">` : '👤';
+
+  document.getElementById('rcName').textContent = s.name;
+  document.getElementById('rcSub').textContent = `Roll No: ${s.roll}  •  ${s.cls}`;
+  document.getElementById('rcBadges').innerHTML = `
+    <span class="rc-badge">${s.cls}</span>
+    <span class="rc-badge">Roll: ${s.roll}</span>
+    ${s.father?`<span class="rc-badge">F: ${s.father}</span>`:''}
+  `;
+
+  const grade = getGrade(pct);
+  document.getElementById('rcSummary').innerHTML = `
+    <div class="rc-sum-box pct-box"><div class="val">${pct}%</div><div class="lbl">Percentage</div></div>
+    <div class="rc-sum-box"><div class="val">${got}/${total}</div><div class="lbl">Total Marks</div></div>
+    <div class="rc-sum-box ${status==='Pass'?'pass':'fail'}">
+      <div class="val">${status==='Pass'?'✅ Pass':'❌ Fail'}</div><div class="lbl">Result</div>
+    </div>
+  `;
+
+  // Marks table
+  document.getElementById('rcMarksBody').innerHTML = subjects.map(sub=>{
+    const obtained = s.marks[sub.name]||0;
+    const subPct = Math.round((obtained/sub.max)*100);
+    const subGrade = getGrade(subPct);
+    const barColor = subPct>=60?'#27ae60':subPct>=33?'#f39c12':'#e74c3c';
+    const subStatus = obtained>=(sub.max*0.33)?'Pass':'Fail';
+    return `<tr>
+      <td><strong>${sub.name}</strong></td>
+      <td><strong>${obtained}</strong></td>
+      <td>${sub.max}</td>
+      <td>
+        <div class="sub-bar-wrap">
+          <div class="sub-bar"><div class="sub-bar-fill" style="width:${subPct}%;background:${barColor}"></div></div>
+          <span style="font-size:12px;color:var(--gray);width:36px">${subPct}%</span>
+        </div>
+      </td>
+      <td><span style="font-weight:700;color:${subGrade.color}">${subGrade.g}</span>
+        <span style="font-size:11px;color:${subStatus==='Pass'?'var(--green)':'var(--red)'};margin-left:4px">${subStatus}</span>
+      </td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('rcRankBadge').innerHTML = `
+    <div class="rc-rank-badge">🏅 Class Rank: #${rank} in ${s.cls}
+      ${rank===1?' 🥇':rank===2?' 🥈':rank===3?' 🥉':''}
+    </div>
+  `;
+
+  document.getElementById('resultCardOverlay').classList.add('open');
+}
+
+function closeResultCard(e){
+  if(e.target===document.getElementById('resultCardOverlay')) closeResultCardDirect();
+}
+function closeResultCardDirect(){
+  document.getElementById('resultCardOverlay').classList.remove('open');
+}
+
+// ========== INIT ==========
+window.onload=function(){
+  renderHome();
+  renderResultsPage();
+};
+</script>
+</body>
+</html>
